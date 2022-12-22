@@ -1,6 +1,8 @@
 {sample: true}
 # Chapter Two
 
+TESTING CHANGE TO CHAPTER 2
+
 Writing in Markdown is easy! You can learn most of what you need to know with just a few examples.
 
 To make *italic text* you surround it with single asterisks. To make **bold text** you surround it with double asterisks.
