@@ -120,7 +120,7 @@ The instructions are dispatched to "Execution Units" where they perform speciali
 
 The following figure illustrates the major processor components in the RISC++ “Core”. There may be several cores on a single chip. Main memory feeds data to one of three caches; the Instruction Cache, the Scalar Data Cache, and the Vector Data Cache. These Level 1 caches are shared between cores. Level 2 caches may also be implemented. The Instruction Cache feeds instructions to the Instruction Control Unit (ICU) from where they are decoded and dispatched. Each core processes both scalar and vector instructions and data in a single thread with a single memory image.
 
-![image](./RISCpp Hardware Overview.jpg "RISC++ Hardware Overview)
+![RISCpp Core](images/RISCpp Core.png)
 
 ## RISC++ Conditional Instructions
 
@@ -352,9 +352,8 @@ Looking at the Assembler code may give the impression that there is a lot of ove
 
 The following flow chart shows how the Condition Bits are used to eliminate instructions from the instruction stream before they are dispatched to the various Execution Units. It also shows that Typed Scalars must first wait in the Reservation Stations for their input operands to be available, before they are sent to the Typed Scalar Unit. This is because the Typed Scalar Unit uses Out of Order Execution, which will be explained in a later chapter:
 
-![](images/RISCpp Instruction Flow.jpg)
+![RISCpp Instruction Flow](images/RISCpp Instruction Flow.png)
 
-![RISC++ Instruction Flow](images/RISCpp Instruction Flow.jpg)
 
 ## What's so RISCy about RISC++?
 
