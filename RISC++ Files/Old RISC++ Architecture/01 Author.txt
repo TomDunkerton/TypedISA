@@ -1,0 +1,14 @@
+﻿{sample: true}
+{class: part}
+
+# About the Author
+
+I was born in Nairobi, Kenya the son of missionaries. I spent most of my childhood in Kenya and Tanzania until I graduated from Rift Valley Academy and returned to the US for college. I graduated from Geneva College in 1978 with a double major in Physics and Computer science. I was very fortunate to get a job with IBM in Endicott N.Y. where I worked as a Computer Engineer testing the design of mid-range mainframes based on the 370 Architecture. A large part of my job involved writing software which verified that the hardware worked according to specifications. 
+
+In 1986 I resigned from IBM and went to Seminary to become a pastor. I also supported myself in doing free lance software development, as a substitute teacher and working in the mental health field. I found a way to keep myself up to date on new technologies by studying new developments in computer architectures. I decided to design an Instruction Set Architecture (ISA) based on the C++ language. To do this, I have spent countless hours on the internet learning about various architectures that have since come and gone. I have spent much time filling my notebooks with various ideas. 
+
+This has become an obsession that occupies a part of my brain that would have otherwise become atrophied. But the computer industry kept evolving and my designs kept becoming obsolete. Add to that my desire to be perfect and the work never got done. Finally, now that I am retired, I have time to get it done. It is far from perfect, but it is as ready as it is going to be. I would value any input on how to make it better.
+
+In my retirement I continue to work as a part-time substitute teacher, who loves gardening, hiking, but most of all playing with my grandchildren. I am a Star Trek fan and I like to binge-watch all the series on Netflix. My favorite is "Enterprise" (I know, I'm weird) and my second favorite is "Deep Space Nine". I enjoy board games, but I'm not as much of a fanatic as my wife. For music, I enjoy the "oldies but goldies", like Simon and Garfunkle, Kenny Rogers, Johnny Cash, John Denver, Peter Paul, and Mary, but also Scott Joplin and Classical. But my favorite music of all is the old Hymns. Basically I'm a nerd who is still stuck in the sixties.
+
+Part of me hopes that some of these ideas may be patented and even make me some money. I really don’t want anyone to steal or take credit for my work. Neither do I want to take credit for the work of others. I value the input of others, and I want these ideas discussed and evaluated. I would especially appreciate input from hardware designers, compiler writers, and people who write performance critical code. Please be kind. This is my baby.

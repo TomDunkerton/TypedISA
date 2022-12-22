@@ -1,0 +1,135 @@
+﻿Add link to (branch prediction) in ISU portion of overview
+
+Add link to software isolated processes
+
+Add link to Virtual memory
+
+
+
+
+Typed and Fast integer registers 256 bytes blocks
+
+Entire register bank can be saved or restored with a single vector load or store
+
+data can be moved to and from vector cache with a single load and store.
+
+(4 + 28) TSR ... 28x64 bit data regs
+
+32 x 16 bit fast integer. 0 to 31
+
+8 to 31 64 bit fast integers. 
+
+64 bit reg 0 reads 0, also base data address.
+
+64 bit reg 1 reads 1 also instruction pointer
+
+64 bit regs 2 - 8 are system pointers. 
+
+Work out vector unit tslr and condition bits. 
+  Condition reg 0 reads 128 bits of zero.
+  Condition reg 1 reads 128 bits of 1.
+  14 x 128 bit condition regs.  ... 1 bit for each of 128 x 16 bit registers in 256 bit long vector.
+  Data types longer than 16 bits require one bit for each 16 bits.
+  Condition regs also used as mask regs for bit wise logical operations.
+  128 bit regs also can be used for 128 bit scalars
+  Scalar indicated when length field in tslr is 00
+
+256 byte block of 128 x 16 registers used for vector control
+   14 x 16 bit tslr for vt, vx , vy  ... 28  bytes
+   uses space otherwise occupied by VR0, VR1
+   16 bit reg 0 used for vector control
+   26bit reg 1 used for accumulated status.
+
+Need an instruction which converts a 16 bit TSLR into a count of the number of elements of various length vectors of differrent types.
+  Example tslr type 16 bit, length 64 yeild number of elements = 32
+                    64 bit, lenghth 128 yields  16 elements
+                    32 bit length 256 yields    64 elements
+  This would be used in for loops to determine the amount to add to index
+  helpful when the data type is not known to the software (operator overloading)
+
+
+
+
+The ICU uses interacts and shares registers with all the other units. It also has eight 64 bit registers of its own. Each of the ICU control registers have 16 control bits and 48 address bits. The registers are:
+
+1. ICR0 - Data Base pointer for active thread. (BP) 
+* 48 bit pointer defines the starting real address for the thread.
+* Page count: Upper 16 bits specify how many 4096 Byte pages are allocated to this thread
+* If Page count = 0000, only 1 x 4K page allocated.
+* If Page count = FFFF, 64K x 4K pages allocated, 256MB maximum 
+* Added to all Data and Instruction pointers to form 48 bit real address.
+
+2. ICR1 - Active Instruction Pointer (IP) 
+* Fetches next Instruction for current thread. 
+* Upper 16 bits contain code set by Hardware or Software Interrupts
+
+3. ICR3 - New IP for Hardware interrupts.
+* Upper 16 bits code describe cause of Interrupt
+* Old IP and BP pushed to Interrupt stack
+
+4. ICR4 - New IP for Software Interupts
+* Upper 16 bits supplied by Software Interrupt Instruction
+* Old IP and BP pushed to interrupt stack
+
+5. ICR5 - Interrupt stack pointer.
+* Upper 16 bits specify Top of Stack and Stack Maximum
+* Last entry reserve for stack overflow interrupt
+
+6. ICR6 - Save/Restore Registers Stack pointer
+* Saves/Restores 256 byte register banks.
+* Stack frame number, Register bank type set in upper 16 bits.
+* Save and Switch Register Bank (SSRB) instruction writes to Vector Cache 256 bytes.
+* New thread starts with new set of registers.
+
+2.3.	EVOLUTION OF VERSION 3.0
+A preliminary version of RISC++ 1.0 was published on Arstechnica.com and several people made comments. I was trying to incorporate Scalar and Vector (SIMD) instructions into a single thread by using a unified set of 128-bit registers. The goal was to simplify hardware by having a single execution unit, a single instruction set, and a single register set, for all the operations in a thread of operation. Many of the comments were about the rare use of 128-bit scalar data, and the wasted space in the registers when 8, 16, 32 or 64-bit scalar data was needed. 128-bit registers are fine for SIMD instructions but are inefficient for scalar. Another major complaint was the use of dynamic register saving when using 128-bit registers. I also did not explain the “why” of dynamic typing very well, but I’m getting ahead of myself.
+So, I archived version 1.0 and started working on version 2.0. That version had two completely different processor types, one for scalar and another for vector operations. That configuration was much like the use of a general purpose Central Processing Unit (CPU) for scalar operations and General Purpose Computing on Graphics Processing Units (GPGPU) for vector operations. These two processor types are used extensively in various CPU/GPU chips manufactured by Intel and AMD. The main difference was the actual ISA which was simpler and more versatile than the X86 Architecture.
+But this approach was moving away from the primary goal of RISC++ which is simple binary code generated from a C++ like compiler. The CPU/GPU configuration requires an Application Programming Interface (API) called CUDA to utilize the GPU for vector operations. CUDA helps the programmer by handling the issues involved with a specific hardware configuration. That configuration was originally designed for Graphics Processing and later adapted for general purpose vector processing. Such an approach has proven to be very successful for many reasons, not the least of which is the ubiquity of CPUs with integrated graphics processors and graphics processor cards made popular by the gaming industry. But this hardware configuration requires very specific hardware and software combinations.
+RISC++ is not intended to replace existing hardware and software, but to provide a niche solution for “scientific processing”, (including Artificial Intelligence). Scientific processing makes heavy use of the 64-bit binary floating-point numerical format for both scalar and vector operations. Therefore, the hardware has been optimized for this format, while also supporting other formats. RISC++ Version 3.0 defines a configuration with a Scalar Unit (SU), which supports Instruction-level parallelism (ILP) and a Vector Unit (VU), which implements Data Parallelism. Both units are accessed by a single thread of instructions. RISC++ also defines an Instruction Control Unit (ICU), a Load/Store Unit (LSU) and a Fast Integer Unit. (FIU) This will be explained in more detail later in the document.
+
+
+
+++++++++++++++++++++++++++++
+
+
+## Out of Order Execution
+
+The most common way to speed up a serial instruction stream is called [Out of Order Execution (OOOE)](https://en.wikipedia.org/wiki/Out-of-order_execution). This method starts with a traditional [Von Neumann Architecture](https://en.wikipedia.org/wiki/Von_Neumann_architecture) which uses an instruction pointer and branch instructions to define the sequence of instructions. Then as serial instructions are decoded they are placed in Reservation Stations where they wait until all their input data are ready. 
+
+As the input data (source registers) become available, the instructions are sent to the appropriate parallel execution units (adders, multipliers, logical units, etc.) for execution. The instructions are often executed in a different order than the program sequence in memory. However, the results are written back to the registers in the original program order. 
+
+OOOE is used by most modern implementations of X86. It is also used in the IBM PowerPC and various other processors. The main advantage of OOOE is that it preserves legacy binary code while still improving single thread performance. The main disadvantages are that it requires highly complex hardware and that only a small window of binary code is optimized at a time.
+
+To illustrate this let us take the example of a line of people waiting (patiently) in queue at a bank. The queue splits into several queues, one for each teller. As each person is serviced by a teller, the customers move on in a different order than when they came in. Some people come in with their checks signed and their deposit slips filled out. Others need to get out of line to fill out the deposit slip. He may not have a working pen and will need to call for help. 
+
+Meanwhile other customers pass him by, get their work done and leave. Once the  unprepared customer gets his check signed and deposit slip filled out he can rejoin the line. At the same time the various tellers take a diferent amount of time depending on the transaction. Some simply desposit a check with all the information ready. Some count a wad of cash. Others have to count pennies. Others sign people up for credit cards they shouldn't have. What does this have to do with computers? Let me explain.
+
+As computers process a serial stream of instructions, those instructions are dispatched to highly specialized Execution Units. Before an instruction can be dispatched, it must have all the neccesary data ready. If it does not, it gets set aside to wait in a Reservation Station. This is like the customer who had to get out of line until he filled out the deposit slip. 
+
+In the RISC++ architecture every instruction must wait until three data items are available: the condition bit, the X, and the Y, input operands. Once those three things are ready the instruction is ready to be dispatched to the appropriate execution unit. The condition bit is tested while the instruction is still in the Instruction Control Unit and before the instruction has been dispatched. If the instruction is dispatched to the Fast Integer Unit
+
+The following instruction types are listest in oder of speed from slowest to fastest:
+1. Slowest: Load from Memory when there is a cache miss.
+2. Faster: Floating point Divide, Square Root, Sine, Cosine, etc.
+3. Faster: Floating Point Multiply.
+4. Faster: Floating Point Add, Subtract, Compare etc.
+5. Fastest: Integer Add, Subtract, And, Or, Compare, etc.
+
+Because Instructions must wait in the reservation station until all the input operands are available, some wait longer than others. The insturctions are executed in a different oder than that which was defined by the Instruction point and branch instructions. [Out of Order Execution (OoOE)](https://en.wikipedia.org/wiki/Out-of-order_execution), which facilitates [Instruction Level Parallelism (ILP)](https://en.wikipedia.org/wiki/Instruction-level_parallelism).
+
+
+
+
+## Data Flow Architecture
+
+There has been much research for increasing ILP using [Dataflow Architecture](https://en.wikipedia.org/wiki/Dataflow_architecture). This family of designs has had a variety of proposed implementations, implemented in both hardware and software. The basic concept is to execute instructions in the order that data arrives at the input to the instruction rather than in the order specified by an Instruction Pointer. While I am not aware of any general-purpose computers using a strict data flow design at the ISA level, the concepts have been used in a variety of applications. In some sense, all the methodologies for increasing ILP discussed below are built on the foundation of research done in Data Flow Architecture.
+
+RISC++ is not a Data Flow Architecture at the ISA level. However, the Typed Status Unit processes instructions according to the availability of input operands. As we have already discussed it does this through Out of Order Execution (OoOE). the next section will expand on this further.
+
+## [Out Of Order Execution (OoOE)](https://en.wikipedia.org/wiki/Out-of-order_execution)
+
+As we have discussed already, RISC++ use OoOE to speed up the execution of serial instructions streams which used dynamically typed registers. The TSRs which hold the data type, also hold a 4-bit status code which helps the ICU manage OoOE and interrupts. 
+
+
+The most common way to speed up a serial instruction stream is called Out of Order Execution (OoOE). This method starts with a traditional Von Neumann Architecture which uses an instruction pointer and branch instructions to define the sequence of instructions. Then as serial instructions are decoded they are placed in Reservation Stations where they wait until all their input data are ready. As the input data (source registers) become available, the instructions are sent to the appropriate parallel execution units (adders, multipliers, logical units, etc.) for execution. The instructions are often executed in a different order than the program sequence in memory. However, the results are written back to the registers in the original program order. OoOE is used by most modern implementations of X86. It is also used in the IBM PowerPC and various other processors. The main advantage of OoOE is that it preserves legacy binary code while still improving single thread performance. The main disadvantages are that it requires highly complex hardware and that only a small window of binary code is optimized at a time.
+

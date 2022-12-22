@@ -1,0 +1,20 @@
+'''
+CODE	SYMBOL	DESCRIPTION					VECTOR SIZE
+------------------------------------------------------------------------------
+0000	SWI	Software Interrupt
+0001	BCD	32 x 4 bit Binary Coded Decimal digits		16   Elements
+0010	ASCII	16 x 8 bit ASCII characters			256  Elements
+0011	DF128	128 bit Decimal Floating Point			16   Elements
+0100	BF16	16  bit Binary Floating Point			128  Elements
+0101	BF32	32  bit Binary Floating Point			64   Elements
+0110	BF64	64  bit Binary Floating Point			32   Elements
+0111	BF128	128 bit Binary Floating Point			16   Elements
+1000	IS16	16  bit Integer Signed				128  Elements
+1001	IS32	32  bit Integer Signed				64   Elements
+1010	IS64	64  bit Integer Signed				32   Elements
+1011	IS128	128 bit Integer Signed				16   Elements
+1100	IU16	16  bit Integer Unsigned			128  Elements
+1001	IU32	32  bit Integer Unsigned			64   Elements
+1010	IU64	64  bit Integer Unsigned			32   Elements
+1011	IU128	128 bit Integer Unsigned			16   Elements
+'''
