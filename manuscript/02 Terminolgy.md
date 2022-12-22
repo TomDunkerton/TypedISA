@@ -53,7 +53,7 @@ Sometimes people erroneously refer to the familiar "tower" as the CPU. This is n
 __________________________________________________________________________
 
 
->>>![System Components](images/System Components.drawio.png)
+>>>![System Components](resources/System Components.drawio.png)
 
 __________________________________________________________________________
 
@@ -221,7 +221,7 @@ The table below compares RISC vs CISC computers:
 
 __________________________________________________________________________________________
 
->>![RISC vs CISC](images/RISC vs CISC.drawio.png)
+>>![RISC vs CISC](resources/RISC vs CISC.drawio.png)
 
 ____________________________________________________________________________________________
 
@@ -231,7 +231,7 @@ The diagram below shows a some of the key components of a typical CPU:
 
 _________________________________________________________________________________________
 
->>![](images/Inside CPU.drawio.png)
+>>![](resources/Inside CPU.drawio.png)
 _________________________________________________________________________________________
 
 ### Cache Memory
