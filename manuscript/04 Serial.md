@@ -12,7 +12,7 @@ While optimizing the parallel portion of a program through parallel processors i
 
 The following illustration and explanation is taken from the Wikipedia article on [Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl%27s_law):
 
-![Optimizing Different Parts](images/Speeding up Serial.jpg)
+![Optimizing Different Parts](Resources/Speeding up Serial.jpg)
 
 A>   Assume that a task has two independent parts, A and B. 
 A>   Part B takes roughly 25% of the time of the whole computation. 
@@ -122,5 +122,4 @@ If the instruction is dispatched to the Fast Integer Unit (FIU) it executes very
 If the instruction is dispatched to the Typed Vector Unit, it must wait in a queue until the two input operands are ready, but other instructions cannot bypass it. Since Vector instructions can take a long time to process, it could be a long wait. But like the FIU, the instructions proceed in the order in which they were dispatched. But once the Vector instruction is finally executed, it processes a large amount of data (256 bytes) in a single instruction cycle. In our bank analogy this could be the drive through window when there is only one teller.
 
 Next I will explain further *why* RISC++ is more than just an interesting idea, but is a powerful CPU that can work cooperatively in today's computing environments.
-
 
