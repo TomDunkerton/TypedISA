@@ -1,1 +1,6 @@
+chapter1.txt
+chapter2.txt
+00 Preface.md
 01 Introduction.md
+02 Terminology.md
+

@@ -183,6 +183,6 @@ Also, while the X86 hardware uses 128 bit registers to facilitate Vector operati
 The rest of the book will go into more details about the RISC++ ISA and the hardware which implements it.
 
 
- 
+
 
 

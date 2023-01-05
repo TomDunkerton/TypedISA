@@ -50,12 +50,21 @@ The second kind of architecture I will be discussing in detail in the book is mi
 
 Sometimes people erroneously refer to the familiar "tower" as the CPU. This is not accurate. The CPU is a computer chip inside the tower. This chip is where the operating system and the various apps run. Inside the "tower" the CPU connects to Random Access Memory (RAM), to one or more Hard Drives, DVD drives, USB hubs, Ethernet ports, and a Graphics Processor Unit (GPU). The GPU connects to the Display through an HDMI port. Connected to the USB ports are the Mouse, Keyboard, Printer, and Flash Drive Memory.
 
+
+
+
+
 __________________________________________________________________________
 
 
->>>![System Components](resources/System Components.drawio.png)
+![System Components](./resources/System Components.drawio.png)
+
 
 __________________________________________________________________________
+
+
+
+
 
 ### Motherboard
 
