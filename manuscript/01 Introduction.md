@@ -44,12 +44,12 @@ I want to make it clear from the outset that **any** High-Level Language can be 
 
 The diagram below illustrates the various components of a generic CPU:
 
+_________________________________
 
 
-![Inside CPU](Inside CPU.drawio.png)
+![](resources/Inside-CPU.png)
 
-
-
+________________________________________
 
 
 [Random Access Memory (RAM)](https://en.wikipedia.org/wiki/Random-access_memory) - The data that the CPU processes is moved into the CPU, processed, and then stored in very fast storage we call RAM or "memory". The data in RAM is lost when the power is turned off, therefore it is important to store the data on Hard Drives or Solid State Devices (SSD). There are many kinds of RAM that can be very fast and expensive or slower and more economical. More on that later when we discuss Registers and Caches.

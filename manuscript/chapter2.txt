@@ -66,7 +66,7 @@ You can add code samples really easily. Code can be in separate files (a "local"
 Here's a local code resource:
 
 {format: ruby}
-![Hello World in Ruby](./resouces/hello.rb)
+![Hello World in Ruby](hello.rb)
 
 ### Inline Code Samples
 
