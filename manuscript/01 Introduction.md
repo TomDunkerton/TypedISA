@@ -46,7 +46,7 @@ The diagram below illustrates the various components of a generic CPU:
 
 
 
-![Inside CPU](./resources/Inside CPU.drawio.png)
+![Inside CPU](Inside CPU.drawio.png)
 
 
 

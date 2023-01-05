@@ -33,7 +33,7 @@ First, add the image to the "resources" folder for your book. You will find the 
 
 If you look in your book's "resources" folder right now, you will see that there is an example image there with the file name "palm-trees.jpg". Here's how you can add this image to your book:
 
-![Palm Trees](./resources/palm-trees.jpg)
+![Palm Trees](palm-trees.jpg)
 
 As this example image shows, **on a line by itself** you type an exclamation point !, followed by the image caption between square brackets and the filename between round brackets.
 
